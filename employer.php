@@ -11,6 +11,7 @@
    <link rel="stylesheet" type="text/css" href="css/demo.css" />
    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/Custom.css" />
+    <script type="text/javascript" src="js/pace.min.js"></script>
    <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="jquery.form.js"></script>
     <script> 
@@ -103,7 +104,7 @@ color: #FFFFFF;
 
 <tr colspan="2">
 <td ><label>Skills Reaquired</label></td><td colspan =4>
-<input type="text" class="inputs" name="skills" size="34">
+<input type="text" class="inputs" name="skills" size="34" placeholder="seperate by commas">
 </td>
 </tr>
 
@@ -155,12 +156,13 @@ color: #FFFFFF;
 <?php
 $host="localhost";
 $usr="root";
-$passw="root";
+$passw="cfg2014!";
 $db="jpmg";
 if(isset($_POST["empid"]))
 {
 $empid=$_POST["empid"];
 $skills=$_POST["skills"];
+
 $salary=$_POST["salary"];
 $desc=$_POST["desc"];
 $nops=$_POST["nopos"];
@@ -169,10 +171,11 @@ $location=$_POST["location"];
 $con=mysqli_connect($host,$usr,$passw,$db);
 
 //print_r($con) ;
-$query="insert into job(emp_id,vacancies,description,company,salary,location) values('".$empid."','".$nops."','".$desc."','".$company."','".$salary."','".$location."')";
+$query="insert into job(emp_id,vacancies,description,company,salary,location,skills) values('".$empid."','".$nops."','".$desc."','".$company."','".$salary."','".$location."','".$skills."')";
 
 $res=mysqli_query($con,$query);
-echo 'hi';
+
+
 if($res==1)
 {
 	echo "<script type='text/javascript'>alert('Job posted successfully');</script>";

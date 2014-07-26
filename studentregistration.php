@@ -87,7 +87,7 @@ color: #FFFFFF;
         <h4>&nbsp;</h4>
       </div>
       <div id="content" style="height:1000px;width:565px;">
-        <form action="employer.php" method="post">
+        <form action="studentregistration.php" method="post">
 <table cellpadding="1"   align="center" cellspacing="1" width="500px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
 
 <tr colspan="2">
@@ -181,14 +181,16 @@ $con=mysqli_connect($haost,$usr,$passw,$db);
 //print_r($con) ;
 $query="insert into trainee(email,skills,name,desc,address,location,mobile,gender) values('".$email."','".$skills."','".$sname."','".$desc."','".$address."','".$location."','".$mobile."','".$gender."')";
 $res=mysqli_query($con,$query);
-
+echo "<script type='text/javascript'>alert('in out res');</script>";
 
 if($res==1)
 {
+	echo "<script type='text/javascript'>alert('in res');</script>";
 	$query="select * from where email='".$email."' and skills='".$skills."' and name='".$sname."' and mobile='".$mobile."' limit 1";
 	$res2=mysqli_query($con,$query);
-	while($row = mysqli_fetch_array($result))
+	while($row = mysqli_fetch_array($res2))
 	{
+		echo "<script type='text/javascript'>alert('in session');</script>";
 		$_SESSION["sid"]=$row['trainee_id'];
 		$_SESSION["spassword"]=$row['password'];
 		

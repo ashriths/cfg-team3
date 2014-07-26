@@ -6,11 +6,9 @@
 */
 
 require './phpmailer/class.phpmailer.php';
-include 'connection.php';
 $token = substr(md5(uniqid(rand(), true)),0,6);
 try {
-	mysql_connect('localhost','root','')or die('Connection Error');
-	$con=mysqli_connect($haost,$usr,$passw,$db);
+	
 	$sid=$_SESSION['sid'];
 	$spass=$_SESSION['spassword'];
 	

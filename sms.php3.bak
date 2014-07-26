@@ -10,7 +10,7 @@ $post_data = array(
 );
  
 $exotel_sid = "student75"; // Your Exotel SID - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
-$exotel_token = "35e9da5fee622c20ec683d9a67f03d45ddf750cf"; // Your exotel token - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
+$exotel_token = "f8c6c580a2915d273f8952f390b598e8bfb53387"; // Your exotel token - Get it from here: http://my.exotel.in/Exotel/settings/site#api-settings
  
 $url = "https://".$exotel_sid.":".$exotel_token."@twilix.exotel.in/v1/Accounts/".$exotel_sid."/Sms/send";
  

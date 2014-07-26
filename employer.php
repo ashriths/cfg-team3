@@ -41,7 +41,7 @@ if($res==1)
 </head> 
 <body>
 <div>
-<form action="2.php" method="post">
+<form action="employer.php" method="post">
 <table cellpadding="1"   align="center" cellspacing="1" width="500px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
 
 <tr colspan="2">

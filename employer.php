@@ -27,7 +27,7 @@ if($res==1)
 	echo "job unable to post";
 	exit();
 }
-
+?>
 <!DOCTYPE html>
 <html> 
 <head> 

@@ -91,10 +91,7 @@ color: #FFFFFF;
 <table cellpadding="1"   align="center" cellspacing="1" width="500px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
 
 <tr colspan="2">
-<td ><label>Student id</label></td><td colspan =4>
-<input type="text" class="inputs" name="sid" id="empid"size="34" required>
-</td>
-</tr>
+
 
 <td ><label>Student name</label></td><td colspan =4>
 <input type="text" class="inputs" name="sname" id="empid"size="34" required>
@@ -134,7 +131,10 @@ color: #FFFFFF;
 <td><textarea rows="4"  class="inputs" cols="20" name="desc" ></textarea></td>
 </tr>
 
-
+<td ><label>Email id</label></td><td colspan =4>
+<input type="email" class="inputs" name="sid" id="emailid"size="34" required>
+</td>
+</tr>
 
 <tr>
 <td></td>
@@ -159,6 +159,8 @@ color: #FFFFFF;
 
 
 <?php
+        session_start();
+		
 $host="localhost";
 $usr="root";
 $passw="cfg2014!";
@@ -167,28 +169,43 @@ if(isset($_POST["sid"]))
 {
 $sid=$_POST["sid"];
 $skills=$_POST["skills"];
-
 $sname=$_POST["sname"];
 $desc=$_POST["desc"];
 $address=$_POST["address"];
 $gender=$_POST["gender"];
 $location=$_POST["location"];
 $mobile=$_POST["mobile"];
-$con=mysqli_connect($host,$usr,$passw,$db);
+$email=$_POST["email"];
+$con=mysqli_connect($haost,$usr,$passw,$db);
 
 //print_r($con) ;
-$query="insert into job(sid,skills,sname,desc,address,location,mobile) values('".$empid."','".$nops."','".$desc."','".$company."','".$salary."','".$location."','".$skills."')";
-
+$query="insert into trainee(email,skills,name,desc,address,location,mobile,gender) values('".$email."','".$skills."','".$sname."','".$desc."','".$address."','".$location."','".$mobile."','".$gender."')";
 $res=mysqli_query($con,$query);
 
 
 if($res==1)
 {
-	echo "<script type='text/javascript'>alert('Job posted successfully');</script>";
+	$query="select * from where email='".$email."' and skills='".$skills."' and name='".$sname."' and mobile='".$mobile."' limit 1";
+	$res2=mysqli_query($con,$query);
+	while($row = mysqli_fetch_array($result))
+	{
+		$_SESSION["sid"]=$row['trainee_id'];
+		$_SESSION["spassword"]=$row['password'];
+		
+	}
+	echo "<script type='text/javascript'>alert('Enrolled successfully');</script>";
+	$url="./mailer.php";
+		 $ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, true);	
+	curl_setopt($ch, CURLOPT_POSTFIELDS, "emailid='.$email.'");
+	curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+	$out=curl_exec($ch);	
+	curl_close($ch); 
 	exit();
 }else
 {
-	echo "<script type='text/javascript'>alert('Unable to post Job');</script>";
+	echo "<script type='text/javascript'>alert('Unable tp enroll');</script>";
 	exit();
 }
 }

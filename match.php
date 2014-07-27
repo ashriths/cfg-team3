@@ -158,20 +158,16 @@ $host="localhost";
 $usr="root";
 $passw="cfg2014!";
 $db="jpmg";
-if(isset($_POST["empid"]))
-{
-$empid=$_POST["empid"];
-$skills=$_POST["skills"];
-
-$salary=$_POST["salary"];
-$desc=$_POST["desc"];
-$nops=$_POST["nopos"];
-$company=$_POST["company"];
-$location=$_POST["location"];
 $con=mysqli_connect($host,$usr,$passw,$db);
+$query="select * from job";
+<table border="1" cellpadding="10">
+
+</table>
+
+
 
 //print_r($con) ;
-$query="insert into job(emp_id,vacancies,description,company,salary,location,skills) values('".$empid."','".$nops."','".$desc."','".$company."','".$salary."','".$location."','".$skills."')";
+$query="select * from job where j_id ='".$jobid."'";
 
 $res=mysqli_query($con,$query);
 

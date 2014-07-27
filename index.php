@@ -63,7 +63,7 @@
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="Login.php" autocomplete="on" method="post"> 
+                            <form  action="index.php" autocomplete="off" method="post" onSubmit="return false"> 
                                 <h1><font color="#FFFAF0">Log in</h1> </font>
                                 <p> 
                                     <label for="username" class="uname" data-icon="u" > Your email or username </label>
@@ -78,7 +78,7 @@
 									<label for="loginkeeping">Keep me logged in</label>
 								</p>
                                 <p class="login button"> 
-                                    <input type="submit" value="Login" /> 
+                                   <a href="employerhome.php"> <input   value="Login" /> </a>
 								</p>
                                 <p class="change_link">
 									Not a member yet ?
@@ -128,6 +128,7 @@
                 </div>  
             </section>
         </div>
+        
     </body>
 </html>
 <?php
@@ -135,7 +136,7 @@ $host="localhost";
 $usr="root";
 $passw="cfg2014!";
 $db="jpmg";
-$unmae=$_POST["usernmae"];
+$uname=$_POST["username"];
 $pass=$_POST["password"];
 $con=mysqli_connect($host,$usr,$passw,$db);
 if(isset($_POST["username"]))
@@ -147,13 +148,19 @@ $res=mysqli_query($con,$query);
 		$row=mysqli_fetch_row($res);
 		if($row["type"]==1)
 		{
-		header("Location:employeehome.php");	
-		echo "<script type='text/javascript'>alert('Login Successful');</script>";
+			echo "<script type='text/javascript'>alert('Login Successful');</script>";
+			echo "<script type='text/javascript'>window.location.href='employerhome.php';</script>";
+		
 		}
 		else if($row["type"]==0)
 		{
-			header("Location:placementhome.php");	
+			header("Location:./placementhome.php");	
 		   echo "<script type='text/javascript'>alert('Login Successful');</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>alert('invalid credentials');</script>";
+				header("Location:./index.php");	
 		}
 		
 		

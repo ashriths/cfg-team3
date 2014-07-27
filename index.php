@@ -130,3 +130,33 @@
         </div>
     </body>
 </html>
+<?php
+$host="localhost";
+$usr="root";
+$passw="cfg2014!";
+$db="jpmg";
+$unmae=$_POST["usernmae"];
+$pass=$_POST["password"];
+$con=mysqli_connect($host,$usr,$passw,$db);
+if(isset($_POST["username"]))
+{
+$query="select * from reg where username='".$uname."' and password='".$pass."' ";
+$res=mysqli_query($con,$query);
+	if(mysqli_num_rows($res)==1)
+	{
+		$row=mysqli_fetch_row($res);
+		if($row["type"]==1)
+		{
+		header("Location:employeehome.php");	
+		echo "<script type='text/javascript'>alert('Login Successful');</script>";
+		}
+		else if($row["type"]==0)
+		{
+			header("Location:placementhome.php");	
+		   echo "<script type='text/javascript'>alert('Login Successful');</script>";
+		}
+		
+		
+	}
+}
+?>

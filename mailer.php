@@ -11,6 +11,7 @@ try {
 	
 	$sid=$_SESSION['sid'];
 	$spass=$_SESSION['spassword'];
+	$semail=$_SESSION['semial'];
 	
 	$mail = new PHPMailer(true); //New instance, with exceptions enabled
 
@@ -38,11 +39,11 @@ try {
 	$mail->From       = "quest.alliance.jpmc@gmail.com";
 	$mail->FromName   = "Admin";
 
-	$to = $email;
 
-	$mail->AddAddress($to);
 
-	$mail->Subject  = "Password For Your RRS Account";
+	$mail->AddAddress($semail);
+
+	$mail->Subject  = "Credentials";
 
 	$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 	$mail->WordWrap   = 80; // set word wrap
@@ -52,7 +53,7 @@ try {
 	$mail->IsHTML(true); // send as HTML
 
 	$mail->Send();
-	echo 'Message has been sent';
+	echo "<script type='text/javascript'>alert('mail sent successfully');</script>";
 } catch (phpmailerException $e) 
 	{
 	echo $e->errorMessage();

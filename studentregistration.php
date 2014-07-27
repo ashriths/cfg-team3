@@ -73,9 +73,9 @@ color: #FFFFFF;
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
            <li ><a href="">Home</a></li>
-          <li><a href="">Enrolling</a></li>
+        
                <li><a href="">Send Notifications</a></li>
-          <li class="selected"><a href="studentregistration.php">Post a Job</a></li>
+          <li class="selected"><a href="studentregistration.php">Enrolling</a></li>
         </ul>
       </div>
     </div>
@@ -132,7 +132,7 @@ color: #FFFFFF;
 </tr>
 
 <td ><label>Email id</label></td><td colspan =4>
-<input type="email" class="inputs" name="sid" id="emailid"size="34" required>
+<input type="text" class="inputs" name="email" size="34" required>
 </td>
 </tr>
 
@@ -165,9 +165,9 @@ $host="localhost";
 $usr="root";
 $passw="cfg2014!";
 $db="jpmg";
-if(isset($_POST["sid"]))
+if(isset($_POST["sname"]))
 {
-$sid=$_POST["sid"];
+$sid=$_POST["sname"];
 $skills=$_POST["skills"];
 $sname=$_POST["sname"];
 $desc=$_POST["desc"];
@@ -176,13 +176,15 @@ $gender=$_POST["gender"];
 $location=$_POST["location"];
 $mobile=$_POST["mobile"];
 $email=$_POST["email"];
-$con=mysqli_connect($haost,$usr,$passw,$db);
-
-//print_r($con) ;
-$query="insert into trainee(email,skills,name,desc,address,location,mobile,gender) values('".$email."','".$skills."','".$sname."','".$desc."','".$address."','".$location."','".$mobile."','".$gender."')";
-$res=mysqli_query($con,$query);
+$con=mysqli_connect($host,$usr,$passw,$db);
 echo "<script type='text/javascript'>alert('in out res');</script>";
 
+//print_r($con) ;
+$query="insert into trainee(email,skills,sname,message,address,location,mobile,gender) values('".$email."','".$skills."','".$sname."','".$desc."','".$address."','".$location."','".$mobile."','".$gender."')";
+
+echo "<script type='text/javascript'>alert('in out res');</script>";
+echo "<script type='text/javascript'>alert(\"".$query."\");</script>";
+$res=mysqli_query($con,$query);
 if($res==1)
 {
 	echo "<script type='text/javascript'>alert('in res');</script>";
@@ -193,17 +195,34 @@ if($res==1)
 		echo "<script type='text/javascript'>alert('in session');</script>";
 		$_SESSION["sid"]=$row['trainee_id'];
 		$_SESSION["spassword"]=$row['password'];
-		
+		$_SESSION["semail"]=$row['email'];
+		$semail=$row['email'];
+			$sid=$row['trainee_id'];
+		$spass=$row['password'];
+
 	}
 	echo "<script type='text/javascript'>alert('Enrolled successfully');</script>";
-	$url="./mailer.php";
-		 $ch = curl_init($url);
+	
+
+    $from = "quest.alliance.jpmc@gmail.com"; // sender
+    $subject = "credentials";
+    $message = $sid+$spass;
+    // message lines should not exceed 70 characters (PHP rule), so wrap it
+    $message = wordwrap($message, 70);
+    // send mail
+    mail("quest.alliance.jpmc@gmail.com",$subject,$message,"From: '".$from."'\n");
+    echo "Thank you for sending us feedback";
+
+
+echo "<script type='text/javascript'>alert('mail successfully');</script>";
+	
+		/* $ch = curl_init($url);$url="./mailer.php";
 	curl_setopt($ch, CURLOPT_POST, true);	
-	curl_setopt($ch, CURLOPT_POSTFIELDS, "emailid='.$email.'");
+	curl_setopt($ch, CURLOPT_POSTFIELDS);
 	curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 	$out=curl_exec($ch);	
-	curl_close($ch); 
+	curl_close($ch); */
 	exit();
 }else
 {

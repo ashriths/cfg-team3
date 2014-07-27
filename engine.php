@@ -42,14 +42,6 @@ box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
 -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.50); 
 -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50); 
 } 
-hr.style-two {
-    border: 0;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-}
 .inputs:focus { 
    background: ##0101DF; 
 color: #FFFFFF; 
@@ -95,7 +87,7 @@ color: #FFFFFF;
         
         <h4>&nbsp;</h4>
       </div>
-      <div id="content" style="height:1000px;width:100%;overflow-y: scroll">
+      <div id="content" style="height:1000px;width:565px;overflow-y: scroll">
 
 <?php
 $host="localhost";
@@ -103,67 +95,23 @@ $usr="root";
 $passw="cfg2014!";
 $db="jpmg";
 $con=mysqli_connect($host,$usr,$passw,$db);
-$query="select * from job";
+$query="select * from trainee";
 $res=mysqli_query($con,$query);
+
+
+$sills=$_POST["skills"];
+$skillset= explode(",", $skills);
+
 
 while($rows=mysqli_fetch_assoc($res))
 {
 	
-		$skills=$rows["skills"];
-		$jobid=$rows["j_id"];
-		$empid=$rows["emp_id"];
-		$vacancies=$rows["vacancies"];
-		$description=$rows["description"];
-		$company=$rows["company"];
-		$salary=$rows["salary"];
-		$location=$rows["location"];
+		$stuskills=$rows["skills"];
 		
-?>
-         <form  action="engine.php" method="Post">
-         
-        <label>Employee Id:</label>
-        <label name="empid"><?=$empid?></label><br><br>
-        
-
-       <label>Company:</label>
-       <label name="company"><?=$company?></label><br><br>
-      
-        <label >Skills Reaquired:</label>
-		<label name="skills"><?=$skills?></label><br><br>
-       
-
-        <label>Salary:</label>
-       <label name="salary"><?=$salary?></label><br><br>
-      
-        <label>No of positions:</label>
-        <label name="vacancies"><?=$vacancies?></label><br><br>
-        
-
-       <label>Description:</label>
-       <label name="desc"><?=$description?></label><br><br>
-        
-
-       <label>location:</label>
-        <label name="comapny"><?=$company?></label><br><br><br>
-       
-
-
-
-
-       
-        <input type="submit" value="View matching candidates" size="30"><br><br>
- 
-</form>
-
-
-		<hr>
+		$stuskillset=explode(",",$skills);
 		
-	<br><br><br>
-<?php
 }
 ?>
-
-
  <br>  <br>	
       	<div id="accordion" style="overflow-y: scroll;">
       	
@@ -172,7 +120,7 @@ while($rows=mysqli_fetch_assoc($res))
 </div>
     </div>
     <div id="footer">
-        Copyrights@Quect COnnect
+        Copyrights@Quest Connect
     </div>
   </div>
 </body>

@@ -152,6 +152,7 @@ color: #FFFFFF;
 </body>
 </html>
 
+<table border="1" cellpadding="10">
 
 <?php
 $host="localhost";
@@ -160,26 +161,86 @@ $passw="cfg2014!";
 $db="jpmg";
 $con=mysqli_connect($host,$usr,$passw,$db);
 $query="select * from job";
-<table border="1" cellpadding="10">
+$res=mysqli_query($con,$query);
+
+while($rows=mysqli_fetch_assoc($res))
+{
+	
+		$skills=$_POST["skills"];
+		$jobid=$_POST["j_id"];
+		$empid=$_POST["emp_id"];
+		$vacancies=$_POST["vacancies"];
+		$description=$_POST["description"];
+		$company=$_POST["company"];
+		$salary=$_POST["salary"];
+		$location=$_POST["location"];
+		
+?>
+         <form name="sellStock" action="engine.php" method="Post">
+         <tr>
+         <table cellpadding="1"   align="center" cellspacing="1" width="100px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
+
+        <tr colspan="2">
+        <td ><label>Employee Id</label></td><td colspan =4>
+        <input type="text" class="inputs" name="empid" id="empid"size="34" value="<?=$empid?>.">
+        </td>
+        </tr>
+
+        <tr>
+        <td><label>Company</label></td>
+        <td><input type="text"  class="inputs" name="company" size="34"  value="<?=$company?>." ></td>
+        </tr>
+
+        <tr colspan="2">
+        <td ><label>Skills Reaquired</label></td><td colspan =4>
+        <input type="text" class="inputs" name="skills" size="34" value="<?=$skills?>.">
+        </td>
+        </tr>
+
+        <tr>
+        <td><label>Salary</label></td>
+        <td><input type="text" class="inputs" name="salary" size="34" value="<?=$salary?>"></td>
+        </tr>
+
+        <tr>
+        <td><label>No of positions</label></td>
+        <td><input type="text"  class="inputs" name="nopos" id="city"size="34"  value="<?=$vacancies?>"></td>
+        </tr>
+
+        <tr>
+        <td><label>Description</label></td>
+        <td><textarea rows="4"  class="inputs" cols="20" name="desc" ><?php $description?></textarea></td>
+        </tr>
+
+        <tr>
+        <td><label>location</label></td>
+        <td><input type="text"  class="inputs" name="location" id="city"size="34"  value="<?=$location?>." ></td>
+        </tr>
+
+
+
+
+        <tr>
+        <td></td>
+        <td colspan=2>
+        <input type="submit" value="Viewmatches" size="30"></td>
+        </tr>
+</table>
+</form>
+
+
+		
+		
+	
+<?php
+}
+?>
 
 </table>
 
 
 
-//print_r($con) ;
-$query="select * from job where j_id ='".$jobid."'";
-
-$res=mysqli_query($con,$query);
 
 
-if($res==1)
-{
-	echo "<script type='text/javascript'>alert('Job posted successfully');</script>";
-	exit();
-}else
-{
-	echo "<script type='text/javascript'>alert('Unable to post Job');</script>";
-	exit();
-}
-}
-?>
+
+

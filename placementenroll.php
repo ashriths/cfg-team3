@@ -187,17 +187,16 @@ echo "<script type='text/javascript'>alert('in out res');</script>";
 //print_r($con) ;
 $query="insert into trainee(email,skills,sname,message,address,location,mobile,gender) values('".$email."','".$skills."','".$sname."','".$desc."','".$address."','".$location."','".$mobile."','".$gender."')";
 
-echo "<script type='text/javascript'>alert('in out res');</script>";
-echo "<script type='text/javascript'>alert(\"".$query."\");</script>";
+
 $res=mysqli_query($con,$query);
 if($res==1)
 {
-	echo "<script type='text/javascript'>alert('in res');</script>";
+	
 	$query="select * from where email='".$email."' and skills='".$skills."' and name='".$sname."' and mobile='".$mobile."' limit 1";
 	$res2=mysqli_query($con,$query);
 	while($row = mysqli_fetch_array($res2))
 	{
-		echo "<script type='text/javascript'>alert('in session');</script>";
+	
 		$_SESSION["sid"]=$row['trainee_id'];
 		$_SESSION["spassword"]=$row['password'];
 		$_SESSION["semail"]=$row['email'];
@@ -206,7 +205,7 @@ if($res==1)
 		$spass=$row['password'];
 
 	}
-	echo "<script type='text/javascript'>alert('Enrolled successfully');</script>";
+	
 	
 
     $from = "quest.alliance.jpmc@gmail.com"; // sender
@@ -219,7 +218,7 @@ if($res==1)
     echo "Thank you for sending us feedback";
 
 
-echo "<script type='text/javascript'>alert('mail successfully');</script>";
+
 	
 		/* $ch = curl_init($url);$url="./mailer.php";
 	curl_setopt($ch, CURLOPT_POST, true);	

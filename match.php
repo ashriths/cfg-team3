@@ -72,11 +72,11 @@ color: #FFFFFF;
       <div id="menubar">
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-           <li ><a href="">Home</a></li>
+           <li class="selected" ><a href="match.php">Home</a></li>
           <li><a href="">Post aJob</a></li>
                <li><a href="">Review contacts</a></li>
           <li><a href="Team.j sp">Manage Posts</a></li>
-          <li class="selected"><a href="employer.php">Post a Job</a></li>
+          <li ><a href="employer.php">Post a Job</a></li>
         </ul>
       </div>
     </div>
@@ -87,72 +87,7 @@ color: #FFFFFF;
         
         <h4>&nbsp;</h4>
       </div>
-      <div id="content" style="height:1000px;width:565px;">
-        <form action="employer.php" method="post">
-<table cellpadding="1"   align="center" cellspacing="1" width="500px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
-
-<tr colspan="2">
-<td ><label>Employee Id</label></td><td colspan =4>
-<input type="text" class="inputs" name="empid" id="empid"size="34">
-</td>
-</tr>
-
-<tr>
-<td><label>Company</label></td>
-<td><input type="text"  class="inputs" name="company" size="34"  ></td>
-</tr>
-
-<tr colspan="2">
-<td ><label>Skills Reaquired</label></td><td colspan =4>
-<input type="text" class="inputs" name="skills" size="34" placeholder="seperate by commas">
-</td>
-</tr>
-
-<tr>
-<td><label>Salary</label></td>
-<td><input type="text" class="inputs" name="salary" size="34"></td>
-</tr>
-
-<tr>
-<td><label>No of positions</label></td>
-<td><input type="text"  class="inputs" name="nopos" id="city"size="34"  ></td>
-</tr>
-
-<tr>
-<td><label>Description</label></td>
-<td><textarea rows="4"  class="inputs" cols="20" name="desc" ></textarea></td>
-</tr>
-
-<tr>
-<td><label>location</label></td>
-<td><input type="text"  class="inputs" name="location" id="city"size="34"  ></td>
-</tr>
-
-
-
-
-<tr>
-<td></td>
-<td colspan=2><input type="reset">
-<input type="submit" value="Post" size="30"></td>
-</tr>
-</table>
-</font>
-</form>   <br>  <br>	
-      	<div id="accordion" style="overflow-y: scroll;">
-      	
-      	</div>
-        <p>&nbsp;</p>
-</div>
-    </div>
-    <div id="footer">
-        Copyrights@Engineering Note Book
-    </div>
-  </div>
-</body>
-</html>
-
-<table border="1" cellpadding="10">
+      <div id="content" style="height:1000px;width:565px;overflow-y: scroll">
 
 <?php
 $host="localhost";
@@ -166,55 +101,57 @@ $res=mysqli_query($con,$query);
 while($rows=mysqli_fetch_assoc($res))
 {
 	
-		$skills=$_POST["skills"];
-		$jobid=$_POST["j_id"];
-		$empid=$_POST["emp_id"];
-		$vacancies=$_POST["vacancies"];
-		$description=$_POST["description"];
-		$company=$_POST["company"];
-		$salary=$_POST["salary"];
-		$location=$_POST["location"];
+		$skills=$rows["skills"];
+		$jobid=$rows["j_id"];
+		$empid=$rows["emp_id"];
+		$vacancies=$rows["vacancies"];
+		$description=$rows["description"];
+		$company=$rows["company"];
+		$salary=$rows["salary"];
+		$location=$rows["location"];
 		
 ?>
-         <form name="sellStock" action="engine.php" method="Post">
+         <form  action="engine.php" method="Post">
          <tr>
          <table cellpadding="1"   align="center" cellspacing="1" width="100px"  bgcolor="#3399FF" style="color:#fff" id="table1_hide">
 
         <tr colspan="2">
         <td ><label>Employee Id</label></td><td colspan =4>
-        <input type="text" class="inputs" name="empid" id="empid"size="34" value="<?=$empid?>.">
+        <label><?=$empid?></label>
         </td>
         </tr>
 
         <tr>
         <td><label>Company</label></td>
-        <td><input type="text"  class="inputs" name="company" size="34"  value="<?=$company?>." ></td>
+        <td>
+         <label><?=$company?></label></td>
         </tr>
 
         <tr colspan="2">
         <td ><label>Skills Reaquired</label></td><td colspan =4>
-        <input type="text" class="inputs" name="skills" size="34" value="<?=$skills?>.">
+
+         <label><?=$skills?></label></td>
         </td>
         </tr>
 
         <tr>
         <td><label>Salary</label></td>
-        <td><input type="text" class="inputs" name="salary" size="34" value="<?=$salary?>"></td>
+        <td><label><?=$salary?></label></td></td>
         </tr>
 
         <tr>
         <td><label>No of positions</label></td>
-        <td><input type="text"  class="inputs" name="nopos" id="city"size="34"  value="<?=$vacancies?>"></td>
+        <td> <label><?=$vacancies?></label></td></td>
         </tr>
 
         <tr>
         <td><label>Description</label></td>
-        <td><textarea rows="4"  class="inputs" cols="20" name="desc" ><?php $description?></textarea></td>
+        <td><textarea rows="4"  class="inputs" cols="20" name="desc" ><?=$description?></textarea></td>
         </tr>
 
         <tr>
         <td><label>location</label></td>
-        <td><input type="text"  class="inputs" name="location" id="city"size="34"  value="<?=$location?>." ></td>
+        <td> <label><?=$company?></label></td></td>
         </tr>
 
 
@@ -237,6 +174,19 @@ while($rows=mysqli_fetch_assoc($res))
 ?>
 
 </table>
+ <br>  <br>	
+      	<div id="accordion" style="overflow-y: scroll;">
+      	
+      	</div>
+        <p>&nbsp;</p>
+</div>
+    </div>
+    <div id="footer">
+        Copyrights@Engineering Note Book
+    </div>
+  </div>
+</body>
+</html>
 
 
 

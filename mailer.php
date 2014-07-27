@@ -6,24 +6,15 @@
 */
 
 require './phpmailer/class.phpmailer.php';
-$token = substr(md5(uniqid(rand(), true)),0,6);
+//include 'connection.php';
 try {
-	
-	$sid=$_SESSION['sid'];
-	$spass=$_SESSION['spassword'];
-	$semail=$_SESSION['semial'];
-	
 	$mail = new PHPMailer(true); //New instance, with exceptions enabled
 
 	//$body             = file_get_contents('contents.html');
 	//$body             = preg_replace('/\\\\/','', $body); //Strip backslashes
-	$en_pass=base64_encode($token);
-	$email=$_POST['emailid'];
-	$uid=$_POST['uid'];
-	$stuname=$_POST['stuname'];
-	$usertype=$_POST['usertype'];
-	$createdby="admin";
-	$body="Congratulations! \n You have been enrolled into Quest Connect Placement program <br/>Username :$sid \n Password :$spass<br/> Thank You!.";
+	//$rad_pass=md5(uniqid(rand(), true));
+	//$email=$_POST['emailid'];
+	$body="The password for your account is <br/>'hi everyone'<br/> and user name will be your respective roll number/mentor Id.";
 	$mail->IsSMTP();                           // tell the class to use SMTP
 	$mail->SMTPAuth   = true;
 	$mail->SMTPSecure = 'ssl'; // enable SMTP authentication
@@ -39,11 +30,11 @@ try {
 	$mail->From       = "quest.alliance.jpmc@gmail.com";
 	$mail->FromName   = "Admin";
 
+	//$to = $email;
 
+	$mail->AddAddress('saikrupa521@gmail.com');
 
-	$mail->AddAddress($semail);
-
-	$mail->Subject  = "Credentials";
+	$mail->Subject  = "Password For Your RRS Account";
 
 	$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 	$mail->WordWrap   = 80; // set word wrap
@@ -53,9 +44,9 @@ try {
 	$mail->IsHTML(true); // send as HTML
 
 	$mail->Send();
-	echo "<script type='text/javascript'>alert('mail sent successfully');</script>";
+	echo 'Message has been sent.';
 } catch (phpmailerException $e) 
 	{
 	echo $e->errorMessage();
-    }
+}
 ?>

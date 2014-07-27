@@ -101,16 +101,75 @@ $res=mysqli_query($con,$query);
 
 $sills=$_POST["skills"];
 $skillset= explode(",", $skills);
+$count=0;
 
-
-while($rows=mysqli_fetch_assoc($res))
+while($rows=mysqli_fetch_assoc($res)&& $count<10)
 {
-	
+	   
 		$stuskills=$rows["skills"];
+		$name=$rows["sname"];
+		$desc=$rows["message"];
+		$addr=$rows["address"];
+		$location=$rows["location"];
+		$mobile=$rows["mobile"];
+		$email=$rows["email"];
+		
 		
 		$stuskillset=explode(",",$skills);
+		for ($j = 0; $j < count($skillset); ++$j) {
+			$flag=0;
+		 for ($i = 0; $i < count($stuskillset); ++$i) {
+			 $lev = levenshtein($stuskillset[$i], $skillset[$j]);
+			 
+				if($lev==0)
+				{
+					$flag=1;
+					break;
+				}
+		 }
+				if($flag==1)
+				{
+					$count++;
+					break;
+				}
+		 }
+        
+		if($flag==1)
+		{  
+		   
+		   
+		   
+		
+			
+		?>
+          <form>
+          <label>Name:</label>
+          <label><?=sname?></label>
+          
+           <label>skills</label>
+          <label><?=sname?></label>
+          </form>
+        
+        
+        
+        
+        
+        <?php
+		
+		
+		
+			
+			
+			
+			
+			
+		}
+		
 		
 }
+		
+	
+
 ?>
  <br>  <br>	
       	<div id="accordion" style="overflow-y: scroll;">

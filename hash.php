@@ -104,11 +104,11 @@ class   HashTable       {
 
         $hash = new HashTable(16);
 
-        $arr = array('nombre' => "jorge niedbalski");
+       // $arr = array('nombre' => "jorge niedbalski");
 
         $hash->add("astroza", $arr);
         $hash->add("astrozas", $arr);
 
-        print_r($hash->search("astroza"));
+        print_r($hash->search("astrozas"));
 
 ?>
